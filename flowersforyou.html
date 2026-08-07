@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neon Pink Showcase with Video and Petals</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #0d0d11; /* Dark background makes neon pink pop */
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Main card container */
+    .photo-card {
+      background-color: #16161f;
+      border-radius: 20px;
+      border: 2px solid #ff007f;
+      box-shadow: 0 0 15px rgba(251, 0, 127, 0.2), inset 0 0 5px rgba(255, 0, 127, 0.1);
+      overflow: hidden;
+      width: 340px;
+      position: relative;
+    }
+
+    /* Checkbox hack setup */
+    .heart-checkbox {
+      display: none;
+    }
+
+    /* VIDEO AREA CONTAINER */
+    .video-wrapper {
+      width: 100%;
+      height: 260px;
+      position: relative;
+      background-color: #000; /* Black backup background while video loads */
+      overflow: hidden;
+    }
+
+    /* The actual video tag properties */
+    .card-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ensures video fits perfectly without stretching */
+      pointer-events: none; /* Prevents video controls from popping up on mobile touch */
+    }
+
+    /* FLOWER PETALS CONTAINER */
+    .petals-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* Individual flower petal styles */
+    .petal {
+      position: absolute;
+      background: #ff007f;
+      border-radius: 15px 0 15px 0;
+      opacity: 0;
+      box-shadow: 0 0 8px rgba(255, 0, 127, 0.6);
+    }
+
+    .p-1 { width: 12px; height: 12px; left: 20%; top: -20px; }
+    .p-2 { width: 16px; height: 16px; left: 50%; top: -20px; background: #ff66b2; }
+    .p-3 { width: 10px; height: 10px; left: 80%; top: -20px; }
+
+    /* Bottom section layout */
+    .card-footer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 15px;
+      background-color: #16161f;
+      position: relative;
+      z-index: 3;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .interactive-label {
+      cursor: pointer;
+      display: inline-block;
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.1s ease;
+    }
+
+    .interactive-label:active {
+      transform: scale(0.9);
+    }
+
+    .icon-svg {
+      width: 50px;
+      height: 50px;
+      fill: #4a4a5a;
+      stroke: #3a3a4a;
+      stroke-width: 1.5px;
+      transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
+    }
+
+    /* Neon Pink Glowing Text */
+    .love-text {
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 0 5px #ff007f, 0 0 15px #ff007f;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+
+    /* CLICKED / TAPPED ACTIONS */
+
+    /* Light up icons on tap */
+    .heart-checkbox:checked + .photo-card .icon-svg {
+      fill: #ff007f;
+      stroke: #ff007f;
+      filter: drop-shadow(0 0 8px #ff007f);
+    }
+
+    /* Bounce animations for icons */
+    .heart-checkbox:checked + .photo-card .heart-icon,
+    .heart-checkbox:checked + .photo-card .cake-icon {
+      animation: popBounce 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Spin animation for the flower */
+    .heart-checkbox:checked + .photo-card .flower-icon {
+      animation: flowerSpin 0.6s ease-out forwards;
+    }
+
+    /* Reveal Text */
+    .heart-checkbox:checked + .photo-card .love-text {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* TRIGGER PETAL FALLING EFFECTS */
+    .heart-checkbox:checked + .photo-card .p-1 { animation: petalFall 2.2s linear infinite; }
+    .heart-checkbox:checked + .photo-card .p-2 { animation: petalFall 1.8s linear infinite; animation-delay: 0.3s; }
+    .heart-checkbox:checked + .photo-card .p-3 { animation: petalFall 2.5s linear infinite; animation-delay: 0.6s; }
+
+    /* ANIMATION KEYFRAMES */
+    @keyframes popBounce {
+      0% { transform: scale(1); }
+      30% { transform: scale(0.7); }
+      60% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @keyframes flowerSpin {
+      0% { transform: scale(1) rotate(0deg); }
+      30% { transform: scale(0.7) rotate(90deg); }
+      60% { transform: scale(1.2) rotate(220deg); }
+      100% { transform: scale(1) rotate(180deg); }
+    }
+
+    @keyframes petalFall {
+      0% { top: -20px; opacity: 0; transform: translateX(0) rotate(0deg); }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { top: 280px; opacity: 0; transform: translateX(35px) rotate(450deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden Central Toggle Switch -->
+  <input type="checkbox" id="card-trigger" class="heart-checkbox">
+  
+  <div class="photo-card">
+    
+    <!-- New Video Element Area -->
+    <div class="video-wrapper">
+      
+      <!-- 
+        Change 'my-video.mp4' below to match your uploaded video filename.
+        autoplay, loop, muted, and playsinline are required for videos to play automatically on iPads.
+      -->
+      <video class="card-video" autoplay loop muted playsinline>
+        <source src="13946117_1920_1080_25fps.mp4" type="video/mp4">
+      </video>
+      
+      <!-- Flower Petal Overlays -->
+      <div class="petals-container">
+        <div class="petal p-1"></div>
+        <div class="petal p-2"></div>
+        <div class="petal p-3"></div>
+      </div>
+    </div>
+    
+    <div class="card-footer">
+      <div class="button-row">
+        <!-- Flower Button -->
+        <label for="card-trigger" class="interactive-label">
+          <svg class="icon-svg flower-icon" viewBox="0 0 24 24" xmlns="http://w3.org">
+            <path d="M12 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-1a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7zm0-6a3.5 3.5 0 0 1 3.5 3.5c0 1-.4 1.9-1.1 2.5.7.6 1.1 1.5 1.1 2.5a3.5 3.5 0 0 1-7 0c0-1 .4-1.9 1.1-2.5-.7-.6-1.1-1.5-1.1-2.5A3.5 3.5 0 0 1 12 2zm0 13c-1.9 0-3.5 1.6-3.5 3.5S10.1 22 12 22s3.5-1.6 3.5-3.5-1.6-3.5-3.5-3.5z"/>
+          </svg>
+        </label>
+
+        <!-- Heart Button -->
+        <label for="card-trigger" class="interactive-label">
+          <svg class="icon-svg heart-icon" viewBox="0 0 24 24" xmlns="http://w3.org">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </label>
+
+        <!-- Birthday Cake Button -->
+        <label for="card-trigger" class="interactive-label">
+          <svg class="icon-svg cake-icon" viewBox="0 0 24 24" xmlns="http://w3.org">
+            <path d="M12 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3zm-1 3h2v4h-2zm-6 5h14v2H5zm0 4h14v2H5zm14-7H5c-1.1 0-2 .9-2 2v2h18v-2c0-1.1-.9-2-2-2z"/>
+          </svg>
+        </label>
+      </div>
+      
+      <div class="love-text">I love you</div>
+    </div>
+
+  </div>
+
+</body>
+</html>

@@ -1,65 +1,45 @@
+
 <?php
-$file = "reservations.json";
+session_start();
 
-$reservations = [];
-
-if (file_exists($file)) {
-    $reservations = json_decode(file_get_contents($file), true);
+if (!isset($_SESSION["reservations"])) {
+    $_SESSION["reservations"] = [];
 }
 
-if (isset($_GET["cancel"])) {
-
-    $id = $_GET["cancel"];
-
-    foreach ($reservations as $key => $res) {
-        if ($res["id"] == $id) {
-            unset($reservations[$key]);
-        }
-    }
-
-    $reservations = array_values($reservations);
-
-    file_put_contents($file, json_encode($reservations));
-
-    header("Location: reservations.php");
-    exit;
-}
+$reservations = $_SESSION["reservations"];
 ?>
 
-<!-- Keep your original HTML and CSS here. -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reservations</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-<?php foreach ($reservations as $res): ?>
-<tr>
-    <td><?= htmlspecialchars($res["pc"]) ?></td>
-    <td><?= htmlspecialchars($res["name"]) ?></td>
-    <td><?= htmlspecialchars($res["student_id"]) ?></td>
-    <td><?= htmlspecialchars($res["date"]) ?></td>
-    <td><?= htmlspecialchars($res["slot"]) ?></td>
-    <td>
-        <a href="?cancel=<?= urlencode($res["id"]) ?>"
-           onclick="return confirm('Cancel this reservation?')">
-           Cancel
-        </a>
-    </td>
-</tr>
-<?php endforeach; ?>
-<script>
-function filterTable() {
+<div class="container">
+    <h1>Student Reservations</h1>
 
-    let search = document.getElementById("searchInput").value.toLowerCase();
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Student ID</th>
+            <th>Computer</th>
+        </tr>
 
-    let rows = document.querySelectorAll("#resTable tbody tr");
+        <?php foreach ($reservations as $r): ?>
+        <tr>
+            <td><?php echo htmlspecialchars($r["name"]); ?></td>
+            <td><?php echo htmlspecialchars($r["studentID"]); ?></td>
+            <td>PC <?php echo $r["seat"]; ?></td>
+        </tr>
+        <?php endforeach; ?>
 
-    rows.forEach(function(row) {
+    </table>
 
-        let text = row.textContent.toLowerCase();
+    <a href="index.php">Home</a>
+    <a href="admin.php">Admin</a>
+</div>
 
-        if (text.includes(search)) {
-            row.style.display = "";
-        } else {
-            row.style.display = "none";
-        }
-
-    });
-}
-</script>
+</body>
+</html>

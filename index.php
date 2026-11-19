@@ -12,7 +12,7 @@ $reservations = $_SESSION["reservations"];
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Computer Laboratory</title>
+    <title>COMPUTER LABORATORY SEAT RESERVATION SYSTEM</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>

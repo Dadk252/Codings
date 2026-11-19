@@ -125,3 +125,32 @@ a {
 .cancel:hover {
     background: #b91c1c;
 }
+
+
+/* Main Heading */
+h1 {
+    color: #1e40af;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-shadow: 1px 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Subtitle */
+p {
+    color: #475569;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+/* Available Seats Heading */
+h3 {
+    color: #1e3a8a;
+    font-size: 23px;
+    font-weight: bold;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}

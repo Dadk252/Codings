@@ -1,16 +1,19 @@
 
 <?php
 session_start();
+include "classes.php";
 
 if (!isset($_SESSION["reservations"])) {
     $_SESSION["reservations"] = [];
 }
 
+$message = "";
+
 if (isset($_POST["submit"])) {
 
-    $name = $_POST["name"];
-    $studentID = $_POST["studentID"];
-    $seat = $_POST["seat"];
+    $name = trim($_POST["name"]);
+    $studentID = trim($_POST["studentID"]);
+    $seat = (int) $_POST["seat"];
 
     $reserved = false;
 
@@ -20,21 +23,27 @@ if (isset($_POST["submit"])) {
         }
     }
 
-    if (!$reserved) {
+    if ($name == "" || $studentID == "") {
+        $message = "Please complete all fields.";
 
-        $_SESSION["reservations"][] = [
-            "name" => $name,
-            "studentID" => $studentID,
-            "seat" => $seat
-        ];
+    } elseif ($seat < 1 || $seat > 20) {
+        $message = "Invalid computer seat.";
 
-        echo "<script>
-        alert('Reservation Successful!');
-        window.location='reservations.php';
-        </script>";
+    } elseif ($reserved) {
+        $message = "Seat already reserved!";
 
     } else {
-        echo "<script>alert('Seat Already Reserved!');</script>";
+
+        $student = new Student();
+        $student->setName($name);
+        $student->setStudentID($studentID);
+
+        $reservation = new Reservation($student, $seat);
+
+        $_SESSION["reservations"][] = $reservation->toArray();
+
+        header("Location: reservations.php");
+        exit;
     }
 }
 ?>
@@ -49,7 +58,10 @@ if (isset($_POST["submit"])) {
 <body>
 
 <div class="container">
+
     <h1>Reserve a Seat</h1>
+
+    <p><?php echo htmlspecialchars($message); ?></p>
 
     <form method="POST" onsubmit="return confirmReservation()">
 
@@ -63,9 +75,23 @@ if (isset($_POST["submit"])) {
             <option value="">Select Computer</option>
 
             <?php for ($i = 1; $i <= 20; $i++): ?>
-                <option value="<?php echo $i; ?>">
-                    Computer <?php echo $i; ?>
-                </option>
+
+                <?php
+                $reserved = false;
+
+                foreach ($_SESSION["reservations"] as $r) {
+                    if ($r["seat"] == $i) {
+                        $reserved = true;
+                    }
+                }
+                ?>
+
+                <?php if (!$reserved): ?>
+                    <option value="<?php echo $i; ?>">
+                        Computer <?php echo $i; ?>
+                    </option>
+                <?php endif; ?>
+
             <?php endfor; ?>
 
         </select>
@@ -77,6 +103,7 @@ if (isset($_POST["submit"])) {
     </form>
 
     <a href="index.php">Back to Home</a>
+
 </div>
 
 </body>

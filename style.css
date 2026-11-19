@@ -210,3 +210,48 @@ body {
         animation: none;
     }
 }
+
+
+/* Search and Edit Forms */
+form {
+    margin: 20px 0;
+}
+
+/* Table Design */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background: white;
+}
+
+th {
+    background: #1e40af;
+    color: white;
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+/* Edit Button */
+a:not(.cancel) {
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+/* Cancel Button */
+a.cancel {
+    background: #dc2626;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+/* Hover */
+a:hover, button:hover {
+    opacity: 0.85;
+}

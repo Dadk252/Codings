@@ -1,9 +1,10 @@
-
+/* General Page Style */
 body {
     font-family: Arial, sans-serif;
     background: #f1f5f9;
     margin: 0;
     padding: 20px;
+    animation: fadeBackground 0.8s ease;
 }
 
 .container {
@@ -13,12 +14,39 @@ body {
     padding: 25px;
     border-radius: 10px;
     text-align: center;
+    animation: pageOpen 0.8s ease-out;
 }
 
+/* Headings and Text */
 h1 {
     color: #1e40af;
+    font-size: 36px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
+    animation: pageOpen 1s ease-out;
 }
 
+
+p {
+    color: #475569;
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 25px;
+}
+
+
+h3 {
+    color: #1e3a8a;
+    font-size: 23px;
+    font-weight: bold;
+    margin: 25px 0 20px;
+    letter-spacing: 0.5px;
+}
+
+
+/* Workstation / Seat Cards */
 .seats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -26,59 +54,40 @@ h1 {
     margin: 20px 0;
 }
 
+
 .seat {
     padding: 20px 5px;
     color: white;
     border-radius: 5px;
+    animation: pageOpen 0.7s ease-out;
 }
+
 
 .available {
     background: green;
 }
 
+
 .reserved {
     background: red;
 }
+
+
+/* Forms */
+form {
+    margin: 20px 0;
+}
+
 
 input, select {
     width: 90%;
     padding: 12px;
     margin: 10px;
-}
-
-button {
-    background: #2563eb;
-    color: white;
-    padding: 12px 25px;
-    border: none;
-    cursor: pointer;
-}
-
-a {
-    display: inline-block;
-    margin: 10px;
-    color: #2563eb;
-    text-decoration: none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-}
-
-th {
-    background: #2563eb;
-    color: white;
+    box-sizing: border-box;
 }
 
 
-/* Enhanced Buttons */
+/* Buttons and Links */
 button, a {
     display: inline-block;
     background: #2563eb;
@@ -90,134 +99,49 @@ button, a {
     font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-    transition: 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-/* Hover Effect */
-button:hover, a:hover {
-    background: #1d4ed8;
-    transform: translateY(-3px);
-    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-}
 
-/* Click Effect */
-button:active, a:active {
-    transform: scale(0.96);
-}
-
-/* Reserve Button */
 button {
     width: 90%;
     margin-top: 15px;
 }
 
-/* Navigation Buttons */
+
 a {
     margin: 8px;
 }
 
-/* Cancel Button */
-.cancel {
-    background: #dc2626;
+
+button:hover, a:hover {
+    background: #1d4ed8;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    opacity: 0.85;
 }
 
-.cancel:hover {
+
+button:active, a:active {
+    transform: scale(0.96);
+}
+
+
+.cancel, a.cancel {
+    background: #dc2626;
+    color: white;
+    border-radius: 8px;
+    padding: 10px 15px;
+}
+
+
+.cancel:hover, a.cancel:hover {
     background: #b91c1c;
 }
 
 
-/* Main Heading */
-h1 {
-    color: #1e40af;
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
-    text-shadow: 1px 2px 3px rgba(0,0,0,0.1);
-}
-
-/* Subtitle */
-p {
-    color: #475569;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 25px;
-}
-
-/* Available Seats Heading */
-h3 {
-    color: #1e3a8a;
-    font-size: 23px;
-    font-weight: bold;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    letter-spacing: 0.5px;
-}
-
-
-/* Page Opening Animation */
-@keyframes pageOpen {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Animate Every Page */
-.container {
-    animation: pageOpen 0.8s ease-out;
-}
-
-/* Heading Animation */
-h1 {
-    animation: pageOpen 1s ease-out;
-}
-
-/* Seat Boxes Animation */
-.seat {
-    animation: pageOpen 0.7s ease-out;
-}
-
-/* Button Animation */
-button, a {
-    transition: all 0.3s ease;
-}
-
-/* Smooth Page Background */
-body {
-    animation: fadeBackground 0.8s ease;
-}
-
-@keyframes fadeBackground {
-    from {
-        opacity: 0.5;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-/* Accessibility */
-@media (prefers-reduced-motion: reduce) {
-    .container, h1, .seat, body {
-        animation: none;
-    }
-}
-
-
-/* Search and Edit Forms */
-form {
-    margin: 20px 0;
-}
-
-/* Table Design */
+/* Tables */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -225,33 +149,74 @@ table {
     background: white;
 }
 
-th {
-    background: #1e40af;
-    color: white;
-}
 
 th, td {
     padding: 12px;
     border: 1px solid #ddd;
 }
 
-/* Edit Button */
-a:not(.cancel) {
-    background: #2563eb;
+
+th {
+    background: #1e40af;
     color: white;
-    border-radius: 8px;
-    padding: 10px 15px;
 }
 
-/* Cancel Button */
-a.cancel {
-    background: #dc2626;
-    color: white;
-    border-radius: 8px;
-    padding: 10px 15px;
+
+/* Page Animations */
+@keyframes pageOpen {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* Hover */
-a:hover, button:hover {
-    opacity: 0.85;
+
+@keyframes fadeBackground {
+    from {
+        opacity: 0.5;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+
+/* Accessibility: Respect reduced-motion settings */
+@media (prefers-reduced-motion: reduce) {
+    body, .container, h1, .seat {
+        animation: none;
+    }
+}
+
+
+/* Small Screens */
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        margin: 15px auto;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    .seats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 8px;
+    }
 }

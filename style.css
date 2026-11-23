@@ -1,4 +1,7 @@
-/* General Page Style */
+
+/* =========================
+   GENERAL PAGE STYLE
+========================= */
 body {
     font-family: Arial, sans-serif;
     background: #f1f5f9;
@@ -9,25 +12,27 @@ body {
 
 .container {
     background: white;
-    max-width: 800px;
+    max-width: 1000px;
     margin: 30px auto;
-    padding: 25px;
+    padding: 30px;
     border-radius: 10px;
     text-align: center;
     animation: pageOpen 0.8s ease-out;
 }
 
-/* Headings and Text */
+
+/* =========================
+   HEADINGS AND TEXT
+========================= */
 h1 {
     color: #1e40af;
-    font-size: 36px;
+    font-size: 40px;
     font-weight: bold;
     letter-spacing: 1px;
     margin-bottom: 12px;
     text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.1);
     animation: pageOpen 1s ease-out;
 }
-
 
 p {
     color: #475569;
@@ -36,24 +41,108 @@ p {
     margin-bottom: 25px;
 }
 
-
 h3 {
     color: #1e3a8a;
-    font-size: 23px;
+    font-size: 26px;
     font-weight: bold;
     margin: 25px 0 20px;
     letter-spacing: 0.5px;
 }
 
 
-/* Workstation / Seat Cards */
+/* =========================
+   DASHBOARD HEADER
+========================= */
+.dashboard-header {
+    padding: 15px 10px 5px;
+    animation: pageOpen 0.8s ease;
+}
+
+.dashboard-header h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.dashboard-header h3 {
+    font-size: 26px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   SEAT STATISTICS CARDS
+========================= */
+.seat-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 25px 0 35px;
+}
+
+.stat-card {
+    padding: 22px 10px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    transition: 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 7px 15px rgba(0, 0, 0, 0.10);
+}
+
+.stat-card span {
+    font-size: 16px;
+    font-weight: bold;
+    color: #475569;
+}
+
+.stat-card h2 {
+    font-size: 35px;
+    margin: 12px 0 0;
+}
+
+.total-card {
+    border-top: 5px solid #2563eb;
+}
+
+.total-card h2 {
+    color: #2563eb;
+}
+
+.available-card {
+    border-top: 5px solid #16a34a;
+}
+
+.available-card h2 {
+    color: #16a34a;
+}
+
+.reserved-card {
+    border-top: 5px solid #dc2626;
+}
+
+.reserved-card h2 {
+    color: #dc2626;
+}
+
+
+/* =========================
+   COMPUTER SEAT CARDS
+========================= */
 .seats {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     margin: 20px 0;
 }
-
 
 .seat {
     padding: 20px 5px;
@@ -62,22 +151,21 @@ h3 {
     animation: pageOpen 0.7s ease-out;
 }
 
-
 .available {
     background: green;
 }
-
 
 .reserved {
     background: red;
 }
 
 
-/* Forms */
+/* =========================
+   FORMS
+========================= */
 form {
     margin: 20px 0;
 }
-
 
 input, select {
     width: 90%;
@@ -87,7 +175,9 @@ input, select {
 }
 
 
-/* Buttons and Links */
+/* =========================
+   BUTTONS AND LINKS
+========================= */
 button, a {
     display: inline-block;
     background: #2563eb;
@@ -103,17 +193,14 @@ button, a {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-
 button {
     width: 90%;
     margin-top: 15px;
 }
 
-
 a {
     margin: 8px;
 }
-
 
 button:hover, a:hover {
     background: #1d4ed8;
@@ -122,11 +209,9 @@ button:hover, a:hover {
     opacity: 0.85;
 }
 
-
 button:active, a:active {
     transform: scale(0.96);
 }
-
 
 .cancel, a.cancel {
     background: #dc2626;
@@ -135,13 +220,14 @@ button:active, a:active {
     padding: 10px 15px;
 }
 
-
 .cancel:hover, a.cancel:hover {
     background: #b91c1c;
 }
 
 
-/* Tables */
+/* =========================
+   TABLES
+========================= */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -149,12 +235,10 @@ table {
     background: white;
 }
 
-
 th, td {
     padding: 12px;
     border: 1px solid #ddd;
 }
-
 
 th {
     background: #1e40af;
@@ -162,30 +246,35 @@ th {
 }
 
 
-/* Page Animations */
+/* =========================
+   PAGE ANIMATIONS
+========================= */
 @keyframes pageOpen {
     from {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
     }
 }
 
-
 @keyframes fadeBackground {
     from {
         opacity: 0.5;
     }
+
     to {
         opacity: 1;
     }
 }
 
 
-/* Accessibility: Respect reduced-motion settings */
+/* =========================
+   ACCESSIBILITY
+========================= */
 @media (prefers-reduced-motion: reduce) {
     body, .container, h1, .seat {
         animation: none;
@@ -193,7 +282,9 @@ th {
 }
 
 
-/* Small Screens */
+/* =========================
+   SMALL SCREENS
+========================= */
 @media (max-width: 600px) {
     body {
         padding: 10px;
@@ -206,6 +297,19 @@ th {
 
     h1 {
         font-size: 28px;
+    }
+
+    .dashboard-header h1 {
+        font-size: 30px;
+    }
+
+    .seat-stats {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .stat-card {
+        padding: 16px;
     }
 
     .seats {

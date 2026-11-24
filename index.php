@@ -1,3 +1,15 @@
+<?php
+session_start();
+
+if (!isset($_SESSION["reservations"])) {
+    $_SESSION["reservations"] = [];
+}
+
+$reservations = $_SESSION["reservations"];
+$total = 20;
+$reserved = count($reservations);
+$available = $total - $reserved;
+?>
 <!DOCTYPE html>
 <html>
 <head>

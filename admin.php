@@ -102,7 +102,7 @@ $reservations = $_SESSION["reservations"];
 
         <h3>Update Reservation</h3>
 
-        <form method="POST">
+        <form method="POST" onsubmit="return confirmUpdate();">
 
             <input type="hidden" name="id"
             value="<?php echo $id; ?>">

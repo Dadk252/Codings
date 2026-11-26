@@ -6,61 +6,79 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    color: #222;
+    background: #f1f5f9;
+    color: #1e293b;
 }
 
-.navbar {
-    background: #202c3b;
+/* Navigation */
+nav {
+    background: #1e293b;
     color: white;
-    padding: 20px;
+    padding: 18px 25px;
     display: flex;
     align-items: center;
-    gap: 20px;
     flex-wrap: wrap;
+    gap: 18px;
 }
 
-.navbar h2 {
+nav h2 {
     margin: 0;
     margin-right: auto;
 }
 
-.navbar a {
+nav a {
     color: white;
     text-decoration: none;
+    padding: 8px;
 }
 
-.navbar a:hover {
+nav a:hover {
     color: #93c5fd;
 }
 
+/* Main content */
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 30px;
+    padding: 30px 20px;
 }
 
+h1 {
+    margin-bottom: 8px;
+}
+
+p {
+    color: #64748b;
+}
+
+/* Dashboard cards */
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
     margin: 25px 0;
 }
 
 .card {
     background: white;
     padding: 22px;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px #00000010;
-    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px #00000008;
 }
 
 .card h3 {
     color: #64748b;
+    font-size: 16px;
 }
 
 .card h2 {
     color: #2563eb;
+    font-size: 27px;
+}
+
+/* Forms */
+.form-card {
+    max-width: 600px;
 }
 
 form {
@@ -69,26 +87,35 @@ form {
     gap: 12px;
 }
 
-input {
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    width: 100%;
-}
-
 label {
     font-weight: bold;
 }
 
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: 2px solid #93c5fd;
+    border-color: #2563eb;
+}
+
+/* Buttons */
 button, .button {
+    display: inline-block;
+    width: fit-content;
+    border: none;
+    border-radius: 7px;
+    padding: 12px 18px;
     background: #2563eb;
     color: white;
-    padding: 12px 18px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
     text-decoration: none;
-    width: fit-content;
+    font-size: 15px;
+    cursor: pointer;
 }
 
 button:hover, .button:hover {
@@ -99,28 +126,46 @@ button:hover, .button:hover {
     background: #64748b;
 }
 
+.secondary:hover {
+    background: #475569;
+}
+
+/* Search */
 .search {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 20px;
+    margin: 20px 0;
+}
+
+.search input {
+    flex: 1;
+    min-width: 180px;
+}
+
+/* Table */
+.table-wrap {
+    overflow-x: auto;
+    background: white;
+    border-radius: 10px;
 }
 
 table {
     width: 100%;
+    min-width: 800px;
     border-collapse: collapse;
-    background: white;
-    margin-top: 20px;
 }
 
 th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
+    padding: 13px;
+    border-bottom: 1px solid #e2e8f0;
     text-align: left;
 }
 
 th {
-    background: #202c3b;
+    background: #1e293b;
     color: white;
 }
 
@@ -128,20 +173,52 @@ tr:nth-child(even) {
     background: #f8fafc;
 }
 
-@media (max-width: 600px) {
+/* Delete */
+.delete-form {
+    display: inline;
+}
+
+.delete-btn {
+    background: #dc2626;
+    padding: 8px 12px;
+}
+
+.delete-btn:hover {
+    background: #b91c1c;
+}
+
+/* Message */
+.message {
+    color: #15803d;
+    font-weight: bold;
+}
+
+/* iPad and smaller screens */
+@media (max-width: 700px) {
+    nav {
+        gap: 10px;
+    }
+
+    nav h2 {
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
     .container {
-        padding: 15px;
+        padding: 20px 14px;
     }
 
-    .search {
-        flex-wrap: wrap;
+    .cards {
+        grid-template-columns: 1fr 1fr;
     }
 
-    table {
-        font-size: 12px;
+    .search button, .search .button {
+        padding: 12px;
     }
+}
 
-    th, td {
-        padding: 7px;
+@media (max-width: 450px) {
+    .cards {
+        grid-template-columns: 1fr;
     }
 }

@@ -9,23 +9,28 @@ if (isset($_POST["save"])) {
     $price = $_POST["price"];
     $quantity = $_POST["quantity"];
 
-    if ($name == "" || !is_numeric($price)
-        || !is_numeric($quantity) || $price <= 0
-        || $quantity <= 0) {
-        $message = "Please enter valid information.";
+    if ($name == "" || !is_numeric($price) || $price <= 0
+        || filter_var($quantity, FILTER_VALIDATE_INT) === false
+        || $quantity < 1) {
+
+        $message = "Please enter valid product, price, and quantity.";
     } else {
-        $total = $price * $quantity;
+        $total = round($price * $quantity, 2);
 
-        $stmt = $conn->prepare("INSERT INTO sales
+        $stmt = $db->prepare("INSERT INTO sales
         (product_name, price, quantity, total)
-        VALUES (?, ?, ?, ?)");
+        VALUES (:name, :price, :quantity, :total)");
 
-        $stmt->bind_param("sdid",
-            $name, $price, $quantity, $total);
+        $stmt->bindValue(":name", $name, SQLITE3_TEXT);
+        $stmt->bindValue(":price", $price, SQLITE3_FLOAT);
+        $stmt->bindValue(":quantity", $quantity, SQLITE3_INTEGER);
+        $stmt->bindValue(":total", $total, SQLITE3_FLOAT);
 
-        $stmt->execute();
-
-        $message = "Sale recorded successfully!";
+        if ($stmt->execute()) {
+            $message = "Sale recorded successfully!";
+        } else {
+            $message = "Unable to save sale.";
+        }
     }
 }
 ?>
@@ -38,20 +43,20 @@ if (isset($_POST["save"])) {
 </head>
 <body>
 
-<div class="navbar">
-    <h2>Sales Recording System</h2>
+<nav>
+    <h2>Sales System</h2>
     <a href="index.php">Dashboard</a>
     <a href="sales.php">Record Sale</a>
     <a href="history.php">Sales History</a>
-</div>
+</nav>
 
 <div class="container">
     <h1>Record a Sale</h1>
-    <p><?php echo $message; ?></p>
 
-    <div class="card">
+    <p class="message"><?php echo htmlspecialchars($message); ?></p>
+
+    <div class="card form-card">
         <form method="POST">
-
             <label>Product Name</label>
             <input type="text" name="product_name"
             placeholder="Enter product name" required>
@@ -60,9 +65,9 @@ if (isset($_POST["save"])) {
             <input type="number" name="price" id="price"
             step="0.01" min="0.01" placeholder="0.00" required>
 
-            <label>Quantity Sold</label>
+            <label>Quantity</label>
             <input type="number" name="quantity" id="quantity"
-            min="1" placeholder="Enter quantity" required>
+            min="1" step="1" placeholder="Enter quantity" required>
 
             <label>Total Amount</label>
             <input type="text" id="total" placeholder="₱0.00" readonly>
